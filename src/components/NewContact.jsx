@@ -15,6 +15,7 @@ const NewContact = () => {
         dispatch(setNotification({message: `${name} added`}))
         dispatch(clearNotification())
       }
+      
   return (
     <form onSubmit={addContact} className=" flex flex-col">
       <div className="flex">

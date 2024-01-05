@@ -11,7 +11,7 @@ const generateId = () =>  Number((Math.random() * 1000000).toFixed(0))
 
 const phoneSlice = createSlice({
   name: 'persons',
-  initialState,
+  initialState: [],
   reducers: {
     createContact(state, action) {
       const {name, number} = action.payload
@@ -31,9 +31,15 @@ const phoneSlice = createSlice({
       return state.map(contact =>
         contact.id !== id ? contact : updatedContact 
       )
+    },
+    appendContact(state, action) {      
+      state.push(action.payload)    
+    },
+    setContacts(state, action) {
+      return action.payload
     }
   }
 })
 
-export const { createContact, updateContact } = phoneSlice.actions
+export const { createContact, updateContact, appendContact, setContacts } = phoneSlice.actions
 export default phoneSlice.reducer
