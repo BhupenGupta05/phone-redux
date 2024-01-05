@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux"
 import { createContact } from "../reducers/phoneReducer"
+import { setNotification, clearNotification } from "../reducers/notificationReducer"
 
 const NewContact = () => {
     const dispatch = useDispatch()
@@ -10,7 +11,9 @@ const NewContact = () => {
         const number = e.target.number.value 
         e.target.name.value = ''
         e.target.number.value = ''
-        dispatch(createContact(name, number))
+        dispatch(createContact({name, number}))
+        dispatch(setNotification({message: `${name} added`}))
+        dispatch(clearNotification())
       }
   return (
     <form onSubmit={addContact} className=" flex flex-col">
