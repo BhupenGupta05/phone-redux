@@ -1,17 +1,19 @@
 import { useDispatch } from "react-redux"
 import { createContact } from "../reducers/phoneReducer"
 import { setNotification, clearNotification } from "../reducers/notificationReducer"
+import phoneService from '../services/persons'
 
 const NewContact = () => {
     const dispatch = useDispatch()
 
-    const addContact = (e) => {
+    const addContact = async (e) => {
         e.preventDefault()
         const name = e.target.name.value 
         const number = e.target.number.value 
         e.target.name.value = ''
         e.target.number.value = ''
-        dispatch(createContact({name, number}))
+        const newContact = await phoneService.create({name, number})
+        dispatch(createContact(newContact))
         dispatch(setNotification({message: `${name} added`}))
         dispatch(clearNotification())
       }

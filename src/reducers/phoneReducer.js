@@ -14,12 +14,7 @@ const phoneSlice = createSlice({
   initialState: [],
   reducers: {
     createContact(state, action) {
-      const {name, number} = action.payload
-      state.push({
-        name,
-        number,
-        id: generateId()
-      })
+      state.push(action.payload)
     },
     updateContact(state, action) {
       const { id, number} = action.payload
