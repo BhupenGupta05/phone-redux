@@ -4,11 +4,13 @@ import { updateContact } from "../reducers/phoneReducer"
 
 const Contacts = () => {
     const dispatch = useDispatch()
-    const persons = useSelector(state => state)
+    const filter = useSelector(state => state.filter)
+    const contactsToShow = useSelector((state) => state.persons
+    .filter((contact) => contact.name.toLowerCase().includes(filter.toLowerCase())))
 
   return (
     <ul>
-        {persons.map(contact => (
+        {contactsToShow.map(contact => (
             <Contact 
             key={contact.id}
             contact={contact}

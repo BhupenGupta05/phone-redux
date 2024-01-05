@@ -13,10 +13,18 @@ const NewContact = () => {
         dispatch(createContact(name, number))
       }
   return (
-    <form onSubmit={addContact}>        
-        <input name="name" />         
-        <input name="number" />         
-        <button type="submit">add</button>      
+    <form onSubmit={addContact} className=" flex flex-col">
+      <div className="flex">
+        <label>Name</label>
+        <input className=" bg-slate-200 rounded-md outline-none m-2 px-4 py-2 w-2/12" name="name" />
+      </div>
+
+      <div className="flex">
+        <label>Number</label>
+        <input className=" bg-slate-200 rounded-md outline-none px-4 py-2 w-2/12" name="number" />
+      </div>
+
+        <button type="submit" className=" bg-blue-700 w-12 rounded-md m-2">add</button>      
     </form>
   )
 }
