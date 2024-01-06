@@ -8,11 +8,7 @@ const getAll = async () => {
 }
 
 const create = async (contact) => {  
-    const contactObj = {
-        name: contact.name,
-        number: contact.number
-    }  
-    const response = await axios.post(baseUrl, contactObj)  
+    const response = await axios.post(baseUrl, contact)  
     return response.data
 }
 
