@@ -1,27 +1,25 @@
 import { useDispatch } from "react-redux"
-import phoneService from './services/persons'
 import Contacts from "./components/Contacts"
 import Filter from "./components/Filter"
 import NewContact from "./components/NewContact"
 import Notification from "./components/Notification"
 import { useEffect } from "react"
-import { setContacts } from "./reducers/phoneReducer"
+import { initializeContacts } from "./reducers/phoneReducer"
 
 const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    phoneService
-    .getAll()
-    .then(contacts => dispatch(setContacts(contacts)))
+    dispatch(initializeContacts())
   }, [])
 
   return (
-    <div>
+    <div className="flex flex-col m-4 gap-4">
       <Notification />
-      <h2>Phone Directory</h2>
-      <NewContact />
+      <h1 className=" text-3xl font-semibold">Phone Directory</h1>
       <Filter />
+      <NewContact />
+      <h2 className="text-2xl font-semibold">Contacts</h2>
       <Contacts />
     </div>
   )

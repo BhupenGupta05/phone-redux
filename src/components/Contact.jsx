@@ -1,8 +1,12 @@
 const Contact = ({ contact, handleClick }) => {
   return (
-    <li key={contact.id} onClick={handleClick}>
+    <div className="flex mb-2">
+      <li key={contact.id} onClick={handleClick} className=" text-lg">
         {contact.name} : {contact.number}
-    </li>
+        </li>
+      <button type="submit" className=" bg-slate-500 rounded-sm max-w-fit px-2 ml-4">Delete</button>
+    </div>
+    
   )
 }
 

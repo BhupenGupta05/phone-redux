@@ -16,4 +16,9 @@ const create = async (contact) => {
     return response.data
 }
 
-export default { getAll, create }
+const update = async (existingContact) => {
+    const response = await axios.put(`${baseUrl}/${existingContact.id}`, existingContact)
+    return response.data
+}
+
+export default { getAll, create, update }

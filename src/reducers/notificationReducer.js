@@ -5,13 +5,11 @@ const notificationSlice = createSlice({
     initialState: {message: "", displayTime: 0},
     reducers: {
         setNotification(state, action) {
-            const { message, displayTime } = action.payload
+            const {message, displayTime} = action.payload
             return {message, displayTime}
         },
         clearNotification(state, action) {
-            setTimeout(() => {
-                return { message: "", displayTime: 0 }
-            }, 5000)
+            return state
         }
     }
 })

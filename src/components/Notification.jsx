@@ -13,7 +13,7 @@ const Notification = () => {
       borderWidth: 1
     }
     return (
-      <div style={style}>
+      <div style={style} className=" items-center">
         {notification.message}
       </div>
     )
