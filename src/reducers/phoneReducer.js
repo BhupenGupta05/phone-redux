@@ -1,13 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import phoneService from '../services/persons'
 
-// const initialState = [
-//     { name: 'Bhupen Gupta',number: '7011179605', id: 1 },
-//     { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
-//     { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
-//     { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
-// ]
-
 const phoneSlice = createSlice({
   name: 'persons',
   initialState: [],
@@ -51,6 +44,37 @@ export const initializeContacts = () => {
   return async dispatch => {
     const persons = await phoneService.getAll()
     dispatch(setContacts(persons))
+  }
+}
+
+export const createContactAsync = (contact) => {
+  return async dispatch => {
+    const {name, number} = contact
+    const contacts = await phoneService.getAll()
+    const existingObject = contacts.find((c) => c.name === name)
+
+      if(existingObject) {
+        const updatedObject = {...existingObject, number}
+        const updatedContact = await phoneService.update(updatedObject)
+        dispatch(updateContact(updatedContact))
+      } else {
+        const newContact = await phoneService.create(contact)
+        dispatch(createContact(newContact))
+      }
+  }
+}
+
+export const updateContactAsync = (existingContact) => {
+  return async dispatch => {
+    const {id, number} = existingContact
+    const contacts = await phoneService.getAll()
+    const existingObject = contacts.find((c) => c.id === id)
+
+    if(existingObject) {
+      const updatedObject = {...existingObject, number}
+      const updatedContact = await phoneService.update(updatedObject)
+      dispatch(updateContact(updatedContact))
+    }
   }
 }
 

@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
-import { createContact, updateContact } from "../reducers/phoneReducer"
-import { setNotification, clearNotification } from "../reducers/notificationReducer"
-import phoneService from '../services/persons'
+import { createContactAsync, updateContactAsync } from "../reducers/phoneReducer"
+import { setNotification, clearNotification, showNotification } from "../reducers/notificationReducer"
 
 const NewContact = () => {
     const dispatch = useDispatch()
@@ -21,24 +20,14 @@ const NewContact = () => {
 
           if(confirmation) {
             const updatedContact = {...existingContact, number}
-            await phoneService.update(updatedContact)
-            dispatch(updateContact(updatedContact))
-            const displayTime = 5
-            dispatch(setNotification({ message: `${name}'s number has been updated` }))
-            setTimeout(() => {
-              dispatch(clearNotification())
-            }, displayTime*1000)
-          } 
+            dispatch(updateContactAsync(updatedContact))
+            dispatch(showNotification(`${name}'s number has been updated`, 5))
         } else {
-          const newContact = await phoneService.create({ name, number })
-          dispatch(createContact(newContact))
-          const displayTime = 5
-          dispatch(setNotification({message: `${name} added`}))
-          setTimeout(() => {
-            dispatch(clearNotification())
-          }, displayTime*1000)
+          dispatch(createContactAsync({name,number}))
+          dispatch(showNotification(`${name} added`, 5))
     }
   }
+}
  
   return (
     <form onSubmit={addContact} className=" flex flex-col">
